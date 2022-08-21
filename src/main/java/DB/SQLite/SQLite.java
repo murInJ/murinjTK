@@ -5,7 +5,9 @@ import src.main.java.FileTK;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @title: SQLite
@@ -138,6 +140,8 @@ public class SQLite {
             destroyed();
         }
     }
+
+
 
     private Connection getConnection() throws ClassNotFoundException, SQLException {
         if (null == connection) connection = getConnection(dbFilePath);
