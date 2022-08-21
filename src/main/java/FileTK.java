@@ -15,14 +15,15 @@ public class FileTK{
         File file = new File(Path);
 
         if(!file.exists()){
-            if(file.isFile()){
-                if(!file.getParentFile().exists()){
-                    file.getParentFile().mkdirs();
-                }
-                return file.createNewFile();
+            if(!file.getParentFile().exists()){
+                file.getParentFile().mkdirs();
             }
+
             if(file.isDirectory()){
                 return file.mkdirs();
+            }
+            else{
+                return file.createNewFile();
             }
         }
 
@@ -34,14 +35,14 @@ public class FileTK{
 
         if(!file.exists()){
             if(isCreate){
-                if(file.isFile()){
-                    if(!file.getParentFile().exists()){
-                        file.getParentFile().mkdirs();
-                    }
-                    return file.createNewFile();
+                if(!file.getParentFile().exists()){
+                    file.getParentFile().mkdirs();
                 }
                 if(file.isDirectory()){
                     return file.mkdirs();
+                }
+                else{
+                    return file.createNewFile();
                 }
             }
             return false;
