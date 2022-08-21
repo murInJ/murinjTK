@@ -1,3 +1,5 @@
+package src.main.java;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -9,11 +11,14 @@ import java.io.IOException;
  */
 
 public class FileTK{
-    public boolean check(String Path) throws IOException{
+    public static boolean check(String Path) throws IOException{
         File file = new File(Path);
 
         if(!file.exists()){
             if(file.isFile()){
+                if(!file.getParentFile().exists()){
+                    file.getParentFile().mkdirs();
+                }
                 return file.createNewFile();
             }
             if(file.isDirectory()){
@@ -24,12 +29,15 @@ public class FileTK{
         return true;
     }
 
-    public boolean check(String Path,boolean isCreate) throws IOException{
+    public static boolean check(String Path,boolean isCreate) throws IOException{
         File file = new File(Path);
 
         if(!file.exists()){
             if(isCreate){
                 if(file.isFile()){
+                    if(!file.getParentFile().exists()){
+                        file.getParentFile().mkdirs();
+                    }
                     return file.createNewFile();
                 }
                 if(file.isDirectory()){
