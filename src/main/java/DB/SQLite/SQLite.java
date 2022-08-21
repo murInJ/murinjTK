@@ -1,4 +1,4 @@
-package src.main.java.DB;
+package src.main.java.DB.SQLite;
 
 import src.main.java.FileTK;
 
@@ -8,17 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @title: SQLiteTK
+ * @title: SQLite
  * @Author MurInj
  * @Date: 2022/8/21 15:33
  * @Version 1.0
  */
 
-public class SQLiteTK {
-    private Connection connection;
-    private Statement statement;
-    private ResultSet resultSet;
-    private String dbFilePath;
+public class SQLite {
+    protected Connection connection;
+    protected Statement statement;
+    protected ResultSet resultSet;
+    protected String dbFilePath;
 
     /**
      * 构造函数
@@ -28,7 +28,7 @@ public class SQLiteTK {
      * @throws SQLException
      * @throws IOException
      */
-    public SQLiteTK(String dbFilePath,boolean isCreate) throws ClassNotFoundException, SQLException, IOException {
+    public SQLite(String dbFilePath, boolean isCreate) throws ClassNotFoundException, SQLException, IOException {
         FileTK.check(dbFilePath,isCreate);
         this.dbFilePath = dbFilePath;
         connection = getConnection(dbFilePath);
@@ -179,5 +179,7 @@ public class SQLiteTK {
     public void setAutoCommit(Boolean status) throws SQLException {
         connection.setAutoCommit(status);
     }
+
+
 }
 

@@ -1,4 +1,4 @@
-package src.main.java.DB;
+package src.main.java.DB.SQLite;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
