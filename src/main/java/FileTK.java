@@ -19,7 +19,7 @@ public class FileTK{
                 file.getParentFile().mkdirs();
             }
 
-            if(file.isDirectory()){
+            if(isDirectory(Path)){
                 return file.mkdirs();
             }
             else{
@@ -38,7 +38,7 @@ public class FileTK{
                 if(!file.getParentFile().exists()){
                     file.getParentFile().mkdirs();
                 }
-                if(file.isDirectory()){
+                if(isDirectory(Path)){
                     return file.mkdirs();
                 }
                 else{
@@ -51,4 +51,12 @@ public class FileTK{
             return true;
         }
     }
+
+    public static boolean isDirectory(String Path){
+        String[] splitPath = Path.split("[/(\\\\)]");
+        int len = splitPath.length;
+        String[] sp = new StringBuilder(splitPath[len - 1]).append("F").substring(1).split("\\.");
+        return sp.length == 1;
+    }
+
 }
