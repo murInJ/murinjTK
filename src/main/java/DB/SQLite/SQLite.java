@@ -100,7 +100,7 @@ public class SQLite {
      * @throws SQLException
      * @throws ClassNotFoundException
      */
-    public int executeUpdate(String sql) throws SQLException, ClassNotFoundException {
+    public  int executeUpdate(String sql) throws SQLException, ClassNotFoundException {
         try {
             return getStatement().executeUpdate(sql);
         } finally {
@@ -148,7 +148,7 @@ public class SQLite {
         return connection;
     }
 
-    private Statement getStatement() throws SQLException, ClassNotFoundException {
+    private  Statement getStatement() throws SQLException, ClassNotFoundException {
         if (null == statement) statement = getConnection().createStatement();
         return statement;
     }
