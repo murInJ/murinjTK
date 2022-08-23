@@ -5,6 +5,8 @@ import DB.SQLite.column.DBcolumn;
 import IO.FileTK;
 
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -71,17 +73,13 @@ public class SQLiteTK extends DB.SQLite.SQLite {
         }
         String sql = "select " + cols + " from " + tableName + " where " + where;
 
-        return executeQuery(sql, rs -> {
-            return (List<Object>) new ArrayList<Object>((Collection<?>) rs);
-        });
+        return executeQuery(sql, SQLiteTK::rs2List);
     }
 
     public  List<Object> Query(String tableName,String columnName,String where) throws SQLException, ClassNotFoundException {
         String sql = "select " + columnName + " from " + tableName + " where " + where;
 
-        return executeQuery(sql, rs -> {
-            return (List<Object>) new ArrayList<Object>((Collection<?>) rs);
-        });
+        return executeQuery(sql, SQLiteTK::rs2List);
     }
 
     public  List<Object> Query(String tableName,String @NotNull [] columnsName) throws SQLException, ClassNotFoundException {
@@ -91,17 +89,13 @@ public class SQLiteTK extends DB.SQLite.SQLite {
         }
         String sql = "select " + cols + " from " + tableName;
 
-        return executeQuery(sql, rs -> {
-            return (List<Object>) new ArrayList<Object>((Collection<?>) rs);
-        });
+        return executeQuery(sql, SQLiteTK::rs2List);
     }
 
-    public  List<Object> Query(String tableName,String columnName) throws SQLException, ClassNotFoundException {
+    public List<Object> Query(String tableName, String columnName) throws SQLException, ClassNotFoundException {
         String sql = "select " + columnName + " from " + tableName;
 
-        return executeQuery(sql, rs -> {
-            return (List<Object>) new ArrayList<Object>((Collection<?>) rs);
-        });
+        return executeQuery(sql, SQLiteTK::rs2List);
     }
 
     public  int Update(String tableName,String[] columnsName,String[] values,String where) throws SQLException, ClassNotFoundException {
@@ -131,5 +125,31 @@ public class SQLiteTK extends DB.SQLite.SQLite {
     public  int Update(String tableName,String columnName,String value) throws SQLException, ClassNotFoundException {
         String sql = "update "+tableName+" set " + columnName + "=" + value;
         return executeUpdate(sql.toString());
+    }
+
+    public List<Object> TablesList() throws SQLException, ClassNotFoundException {
+        return executeQuery("select * from sqlite_master where type = \"table\"",SQLiteTK::rs2List);
+    }
+
+    public List<Object> getTableStruct(String tableName) throws SQLException, ClassNotFoundException {
+        return executeQuery("select * from sqlite_master where type=\"table\" and name=\""+tableName+"\"",SQLiteTK::rs2List);
+    }
+
+    public List<Object> getColumnsName(String tableName) throws SQLException, ClassNotFoundException {
+        return executeQuery("PRAGMA table_info("+tableName+")",SQLiteTK::rs2List);
+    }
+
+    public static List<Object> rs2List(ResultSet rs) throws SQLException{
+        List<Object> list = new ArrayList<>();
+        ResultSetMetaData md = rs.getMetaData();//获取键名
+        int columnCount = md.getColumnCount();//获取行的数量
+        while (rs.next()) {
+            Map<String,Object> rowData = new HashMap<>();//声明Map
+            for (int i = 1; i <= columnCount; i++) {
+                rowData.put(md.getColumnName(i), rs.getObject(i));//获取键名及值
+            }
+            list.add(rowData);
+        }
+        return list;
     }
 }
