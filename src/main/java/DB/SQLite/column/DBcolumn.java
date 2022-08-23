@@ -1,7 +1,7 @@
-package src.main.java.DB.SQLite.column;
+package DB.SQLite.column;
 
-import src.main.java.DB.SQLite.column.columnDefinition.columnDefinition;
-import src.main.java.DB.SQLite.column.columnType.columnType;
+import DB.SQLite.column.columnDefinition.columnDefinition;
+import DB.SQLite.column.columnType.columnType;
 
 import java.util.HashSet;
 import java.util.Iterator;

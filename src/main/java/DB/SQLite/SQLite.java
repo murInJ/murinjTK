@@ -1,13 +1,13 @@
-package src.main.java.DB.SQLite;
+package DB.SQLite;
 
-import src.main.java.FileTK;
+
+
+import IO.FileTK;
 
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @title: SQLite
@@ -61,7 +61,7 @@ public class SQLite {
      * @throws SQLException
      * @throws ClassNotFoundException
      */
-    public <T> T executeQuery(String sql, ResultSetExtractor<T> rse) throws SQLException, ClassNotFoundException {
+    public <T> T executeQuery(String sql, DB.SQLite.ResultSetExtractor<T> rse) throws SQLException, ClassNotFoundException {
         try {
             resultSet = getStatement().executeQuery(sql);
             T rs = rse.extractData(resultSet);
@@ -80,7 +80,7 @@ public class SQLite {
      * @throws SQLException
      * @throws ClassNotFoundException
      */
-    public <T> List<T> executeQuery(String sql, RowMapper<T> rm) throws SQLException, ClassNotFoundException {
+    public <T> List<T> executeQuery(String sql, DB.SQLite.RowMapper<T> rm) throws SQLException, ClassNotFoundException {
         List<T> rsList = new ArrayList<T>();
         try {
             resultSet = getStatement().executeQuery(sql);

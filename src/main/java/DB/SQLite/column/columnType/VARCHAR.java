@@ -1,4 +1,4 @@
-package src.main.java.DB.SQLite.column.columnType;
+package DB.SQLite.column.columnType;
 
 /**
  * @title: VARCHAR

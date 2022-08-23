@@ -1,14 +1,10 @@
-package src.main.java.DB.SQLite;
+package DB.SQLite;
 
 import org.jetbrains.annotations.NotNull;
-import src.main.java.DB.SQLite.column.DBcolumn;
-import src.main.java.DB.SQLite.column.columnDefinition.columnDefinition;
-import src.main.java.FileTK;
+import DB.SQLite.column.DBcolumn;
+import IO.FileTK;
 
 import java.io.IOException;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Target;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -19,7 +15,7 @@ import java.util.*;
  * @Version 1.1.3
  */
 
-public class SQLiteTK extends SQLite {
+public class SQLiteTK extends DB.SQLite.SQLite {
     public SQLiteTK(String Path,boolean isCreate) throws SQLException, IOException, ClassNotFoundException {
         super(Path,isCreate);
     }

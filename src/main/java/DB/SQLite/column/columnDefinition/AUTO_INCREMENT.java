@@ -1,4 +1,4 @@
-package src.main.java.DB.SQLite.column.columnDefinition;
+package DB.SQLite.column.columnDefinition;
 
 /**
  * @title: AUTO_INCREMENT

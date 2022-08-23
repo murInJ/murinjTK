@@ -1,7 +1,8 @@
-package src.main.java;
+package IO;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * @title: File
@@ -59,4 +60,35 @@ public class FileTK{
         return sp.length == 1;
     }
 
+    public static String readFile(String jsonFile){
+        StringBuilder strbuilder = new StringBuilder();
+        try(BufferedReader br= Files.newBufferedReader(Paths.get(jsonFile))) {
+            String str;
+            while ((str=br.readLine())!=null){
+                strbuilder.append(str);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return strbuilder.toString();
+    }
+
+    public static String readFile(String jsonFile,boolean isBuffer){
+        StringBuilder strbuilder = new StringBuilder();
+        try(BufferedReader br= isBuffer ? new BufferedReader(new FileReader(jsonFile)) : Files.newBufferedReader(Paths.get(jsonFile))) {
+            String str;
+            while ((str=br.readLine())!=null){
+                strbuilder.append(str);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return strbuilder.toString();
+    }
+
+    public static void writeFile(String filepath, String content) throws IOException {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filepath))) {
+            bufferedWriter.write(content);
+        }
+    }
 }

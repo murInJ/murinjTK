@@ -1,4 +1,4 @@
-package src.main.java.DB.SQLite.column.columnDefinition;
+package DB.SQLite.column.columnDefinition;
 
 public class PRIMARY_KEY extends columnDefinition {
     @Override
