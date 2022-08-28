@@ -120,4 +120,17 @@ public class FileTK{
         }
     }
 
+    public static void execFile(String filePath){
+        if (java.awt.Desktop.isDesktopSupported()) {
+            try {
+                java.awt.Desktop dp = java.awt.Desktop.getDesktop();
+                if (dp.isSupported(java.awt.Desktop.Action.BROWSE)) {
+                    dp.open(new File(filePath));
+
+                }
+            } catch (NullPointerException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
